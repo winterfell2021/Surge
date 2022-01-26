@@ -1,0 +1,9 @@
+#!name=钱迹
+#!desc=激活钱迹终生vip
+[MITM]
+hostname = %APPEND% qianji.xxoojoke.com
+
+[Script]
+qianji.js = type=http-response,pattern=^https:\/\/qianji\.xxoojoke\.com\/vip\/configios.*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/winterfell2021/Surge/master/scripts/qianji.js
+
+
