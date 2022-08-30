@@ -1,5 +1,5 @@
 /*
-0 8,10,21 * * * mtask own/oclean.js now
+0 8,10,21 * * * mtask /jd/own/oclean.js now
 */
 const $ = new Env('欧可林商城');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -45,7 +45,7 @@ function showMsg() {
 function grad(redId=2, clientType=2){
     let options = taskUrl('', `action=GrabEveryDayPoint&redId=${redId}&clientType=${clientType}`)
     return new Promise((resolve, reject) => {
-        request(options, (err, resp, data) => {
+        $.post(options, (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`请求失败：${$.toStr(err)}\n`)
@@ -62,8 +62,12 @@ function grad(redId=2, clientType=2){
                             message += `【用户${$.index}】抽奖失败，已抽奖\n`
                         }
                     } else if (data['Status'] === "NO") {
-                        message += `【用户${$.index}】cookie失效\n`
-                        console.log(`【用户${$.index}】cookie失效\n`)
+                        if (data['Code'] === 4 || data['Code'] === 6){
+                            console.log(`${data.Message}`)
+                        }else{
+                            message += `【用户${$.index}】cookie失效\n`
+                            console.log(`【用户${$.index}】cookie失效\n`)
+                        }
                     } else {
                         console.log(`抽奖失败，请检查：${$.toStr(data)}`)
                     }
@@ -114,7 +118,7 @@ function sign() {
 function getFreeDraw(){
     let options = taskUrl('?action=GetActivityInfo', 'ActivityId=9&clientType=2')
     return new Promise((resolve, reject) => {
-        $.post(options, (err, resp, data) => {
+        $.post(options, async (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`请求失败：${$.toStr(err)}\n`)
