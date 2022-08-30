@@ -1,5 +1,5 @@
 /*
-0 10,21 * * * mtask own/oclean_mini.js now
+0 10,21 * * * mtask /jd/own/oclean_mini.js now
 */
 const $ = new Env('欧可林商城');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -61,7 +61,7 @@ function grad(redId=2){
                             message += `【用户${$.index}】抽奖失败，${$.toStr(data)}\n`
                         }
                     } else if (data['Status'] === "NO") {
-                        if (data['Code'] === 4){
+                        if (data['Code'] === 4 || data['Code'] === 6){
                             console.log(`${data.Message}`)
                         }else{
                             message += `【用户${$.index}】cookie失效\n`
