@@ -52,18 +52,21 @@ function grad(redId=2, clientType=2){
                 } else {
                     data = $.toObj(data);
                     if (data['Status'] === 'OK') {
-                        if(data['Code'] === 1){
-                            $.point = data['Data']['points']
+                        if(data['Code'] === 1 || data['Code'] === 0){
+                            $.point = data['Data']['Point']
                             console.log(`抽奖成功，获得${$.point}积分`)
                             message += `【用户${$.index}】抽奖成功，获得${$.point}积分\n`
                         }
                         else if(data['Code'] === 2){
                             console.log(`抽奖失败，抽奖失败，已抽奖`)
                             message += `【用户${$.index}】抽奖失败，已抽奖\n`
+                        } else{
+                            console.log(`${$.toStr(data)}`)
                         }
                     } else if (data['Status'] === "NO") {
-                        if (data['Code'] === 4 || data['Code'] === 6){
+                        if (data['Code'] === 4 || data['Code'] === 6 || data['Code'] === 5){
                             console.log(`${data.Message}`)
+                            message += `【用户${$.index}】${data.Message}\n`
                         }else{
                             message += `【用户${$.index}】cookie失效\n`
                             console.log(`【用户${$.index}】cookie失效\n`)
