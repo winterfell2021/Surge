@@ -3,7 +3,6 @@ const $ = new Env('酷狗音乐');
   if (typeof $response !== "undefined" && $response) {
     let body = JSON.parse($response.body)
     if ($request.url.indexOf("vip/v2/user/vip") > -1) {
-            // {"data":{"luxAutoPayUser":"0","vipExpire":"4000000000000","vipmExpire":"4000000000000","biedAlbum":"0","vipOverSeasExpire":"4000000000000","vipLuxuryExpire":"4000000000000","time":"1961170340993","svipExpire":"0","biedSong":"0","isYearUser":"2","svipAutoPayUser":"0","vip3Expire":"4000000000000","vipmAutoPayUser":"0","experienceExpire":"0","isNewUser":"2"},"ctime":1675002962988,"meta":{"desc":"成功","code":200}}
         body['data'] = {
             "luxAutoPayUser": "0",
             "vipExpire": "4000000000000",
@@ -24,7 +23,19 @@ const $ = new Env('酷狗音乐');
     }
     if ($request.url.indexOf("https://vip1.kuwo.cn/vip/v2/userbase/vip?op=getMCInfo") > -1) {
         if (!Array.isArray(data)){
-            data['tsui'] = "{\"timestamp\":1674205529,\"packs\":{\"type\":0,\"end\":4000000000,\"period\":1,\"bought_vip\":1,\"bought_vip_end\":4000000000},\"result\":\"ok\"}"
+            data['tsui'] = JSON.stringify(
+                {
+                    "timestamp": +new Date(),
+                    "packs": {
+                        "type": 0,
+                        "end": 4000000000,
+                        "period": 1,
+                        "bought_vip": 1,
+                        "bought_vip_end": 4000000000
+                    },
+                    "result": "ok"
+                }
+            )
         }
     }
     $.done({body:JSON.stringify(body)})
