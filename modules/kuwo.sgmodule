@@ -7,5 +7,5 @@ hostname = %APPEND% *.kuwo.cn
 vip1 = type=http-response,pattern=^https?:\/\/vip1\.kuwo\.cn\/vip\/enc\/user\/vip\?op=ui,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/winterfell2021/Surge/master/scripts/kuwo.js
 vip2 = type=http-response,pattern=^https?:\/\/vip1\.kuwo\.cn\/vip\/v2\/userbase\/vip\?op=get,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/winterfell2021/Surge/master/scripts/kuwo.js
 vip3 = type=http-response,pattern=^https?:\/\/vip1\.kuwo\.cn\/vip\/v2\/user\/vip($|\?op=ui),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/winterfell2021/Surge/master/scripts/kuwo.js
-
+digital = type=http-response,pattern=^https?:\/\/musicpay\.kuwo\.cn\/music\.pay\?newver ,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/winterfell2021/Surge/master/scripts/kuwo.js
 

@@ -2,6 +2,17 @@ const $ = new Env('酷狗音乐');
 !(async () => {
   if (typeof $response !== "undefined" && $response) {
     let body = JSON.parse($response.body)
+    if ($request.url.indexOf("music.pay") > -1) {
+        let song = bodu['songs'][0]
+        song['pay'] = 16515324
+        song['fpay'] = 1
+        song['payinfo']['feeType'] = {
+          "vip":"1",
+          "song":"1",
+          "album":"0",
+          "bookvip":"0"
+        }
+    }
     if ($request.url.indexOf("vip/v2/user/vip") > -1) {
         body['data'] = {
             "luxAutoPayUser": "0",
