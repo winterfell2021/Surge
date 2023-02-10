@@ -3,7 +3,7 @@ const $ = new Env('酷狗音乐');
   if (typeof $response !== "undefined" && $response) {
     let body = JSON.parse($response.body)
     if ($request.url.indexOf("music.pay") > -1) {
-        let song = bodu['songs'][0]
+        let song = body['songs'][0]
         song['pay'] = 16515324
         song['fpay'] = 1
         song['payinfo']['feeType'] = {
